@@ -1,7 +1,11 @@
-﻿using BaseApiArchitecture.Implementations;
+﻿using BaseApiArchitecture.Domain;
+using BaseApiArchitecture.Implementations;
 using BaseApiArchitecture.Interfaces;
 using BaseApiArchitecture.Utils;
+using CloudMicroServices.Data;
+using CloudMicroServices.Domain.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CloudMicroServices.Web.Core.Configurations
@@ -10,7 +14,6 @@ namespace CloudMicroServices.Web.Core.Configurations
 	{
 		public static void RegisterAppServices(IServiceCollection services)
 		{
-			//services.AddTransient<IEmailSender, EmailSender>();
 			services.AddDbContext<PortalContext>();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -25,11 +28,11 @@ namespace CloudMicroServices.Web.Core.Configurations
 			services.AddScoped<IProcessStrategy, FunctionProcessStrategy>();
 
 			// Bussiness Services
-			services.AddScoped<IUsuarioBussiness, UsuarioBussiness>();
+			//services.AddScoped<IUsuarioBussiness, UsuarioBussiness>();
 
 			// Operações de CRUD
-			services.RegisterAllConcreteTypes(typeof(IBaseOperations<>), new[] { typeof(Usuario).Assembly, typeof(Startup).Assembly });
-			services.RegisterAllGenericTypes(typeof(IBaseOperations<>), typeof(BaseOperationsService<>), new[] { typeof(Usuario).Assembly, typeof(Startup).Assembly });
+			//services.RegisterAllConcreteTypes(typeof(IBaseOperations<>), new[] { typeof(Usuario).Assembly, typeof(Startup).Assembly });
+			//services.RegisterAllGenericTypes(typeof(IBaseOperations<>), typeof(BaseOperationsService<>), new[] { typeof(Usuario).Assembly, typeof(Startup).Assembly });
 
 			// Repositórios 
 			services.RegisterAllConcreteTypes(typeof(IRepository<>), new[] { typeof(Usuario).Assembly, typeof(Startup).Assembly });

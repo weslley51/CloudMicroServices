@@ -1,5 +1,7 @@
 ﻿using System.IO;
 using System.Text;
+using AutoMapper;
+using CloudMicroServices.Web.Core.Configurations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -10,6 +12,7 @@ using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace CloudMicroServices.Web
 {
@@ -19,11 +22,11 @@ namespace CloudMicroServices.Web
 
 		public void ConfigureServices(IServiceCollection Services)
 		{
-			Services.AddAuthentication(IISDefaults.AuthenticationScheme);
 			Services.AddAutoMapper(typeof(Startup));
+			Services.AddAuthentication(IISDefaults.AuthenticationScheme);
 
-			//Services.Configure<Email>(Configuration.GetSection("EmailSettings"));
 			IoC.RegisterAppServices(Services);
+			Services.AddTransient(s => s.GetService<IHttpContextAccessor>().HttpContext.User);
 
 			var AppSettingsSection = Configuration.GetSection("AppSettings");
 			Services.Configure<AppSettings>(AppSettingsSection);
@@ -48,35 +51,31 @@ namespace CloudMicroServices.Web
 					ValidateAudience = false
 				};
 			});
-
-			Services.AddAuthorization(options =>
+			
+			Services.AddAuthorization(Options =>
 			{
-				options.AddPolicy("Authorized", policy => policy.RequireClaim("UserAuthorized"));
-				options.AddPolicy("Unauthorized", policy => policy.RequireClaim("UserUnauthorized"));
+				Options.AddPolicy("Authorized", policy => policy.RequireClaim("UserAuthorized"));
+				Options.AddPolicy("Unauthorized", policy => policy.RequireClaim("UserUnauthorized"));
 			});
 
-			Services.AddTransient(s => s.GetService<IHttpContextAccessor>().HttpContext.User);
-
-			Services.AddMvc(config =>
+			Services.AddMvc(Configurations =>
 			{
-				/* Adiciona Authorization em todas as controller da API */
-				var Policy = new AuthorizationPolicyBuilder()
-					.RequireAuthenticatedUser()
-					.Build();
-
-				config.Filters.Add(new AuthorizeFilter(Policy));
+				var Policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+				Configurations.Filters.Add(new AuthorizeFilter(Policy));
 			})
-			.AddJsonOptions(options => { options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver(); });
+			.AddJsonOptions(Options => {
+				Options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+				Options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+				Options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
+				Options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
+			});
 		}
-	}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder App, IHostingEnvironment Environment)
 		{
 			if (Environment.IsDevelopment())
-			{
 				App.UseDeveloperExceptionPage();
-			}
 
 			App.Use(async (Context, Next) =>
 			{
@@ -92,7 +91,7 @@ namespace CloudMicroServices.Web
 
 			App.UseDefaultFiles()
 				.UseStaticFiles()
-				.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials())
+				.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials())
 				.UseAuthentication()
 				.UseMvc();
 		}

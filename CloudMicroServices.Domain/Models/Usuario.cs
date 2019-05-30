@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CloudMicroServices.Domain.Models
 {	
-	public class Usuario : BaseEntity
+	public class Usuario : DomainEntity
 	{
 		public string Login { get; set; }
 		public string Senha { get; set; }

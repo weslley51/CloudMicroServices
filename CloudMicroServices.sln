@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudMicroServices.Domain",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseApiArchitecture", "..\BaseApiArchitecture\BaseApiArchitecture\BaseApiArchitecture.csproj", "{9B7ADE4D-794C-4EF1-A7D5-DE7DBE45107E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMicroServices.Data", "CloudMicroServices.Data\CloudMicroServices.Data.csproj", "{10620F74-B25A-4D68-BF99-C9B44121ABFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudMicroServices.Data", "CloudMicroServices.Data\CloudMicroServices.Data.csproj", "{10620F74-B25A-4D68-BF99-C9B44121ABFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMicroServicesAuthentication", "CloudMicroServicesAuthentication\CloudMicroServicesAuthentication.csproj", "{1E4C3B00-448A-4B13-92D0-011361777507}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciarAcesso", "GerenciarAcesso\GerenciarAcesso.csproj", "{A308D762-5FCE-483B-AA44-B579CD574452}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMicroServices.MongoData", "CloudMicroServices.MongoData\CloudMicroServices.MongoData.csproj", "{3D656F59-148F-4F6A-A42D-A5BD695FA9DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +43,14 @@ Global
 		{10620F74-B25A-4D68-BF99-C9B44121ABFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10620F74-B25A-4D68-BF99-C9B44121ABFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10620F74-B25A-4D68-BF99-C9B44121ABFA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1E4C3B00-448A-4B13-92D0-011361777507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E4C3B00-448A-4B13-92D0-011361777507}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E4C3B00-448A-4B13-92D0-011361777507}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E4C3B00-448A-4B13-92D0-011361777507}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A308D762-5FCE-483B-AA44-B579CD574452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A308D762-5FCE-483B-AA44-B579CD574452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A308D762-5FCE-483B-AA44-B579CD574452}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A308D762-5FCE-483B-AA44-B579CD574452}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D656F59-148F-4F6A-A42D-A5BD695FA9DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D656F59-148F-4F6A-A42D-A5BD695FA9DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D656F59-148F-4F6A-A42D-A5BD695FA9DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D656F59-148F-4F6A-A42D-A5BD695FA9DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,7 +60,8 @@ Global
 		{86B033C4-4C33-4E25-8201-973D4FBA33A4} = {BB7D3AA1-260F-4890-B037-1FC0D14C839C}
 		{9B7ADE4D-794C-4EF1-A7D5-DE7DBE45107E} = {BB7D3AA1-260F-4890-B037-1FC0D14C839C}
 		{10620F74-B25A-4D68-BF99-C9B44121ABFA} = {BB7D3AA1-260F-4890-B037-1FC0D14C839C}
-		{1E4C3B00-448A-4B13-92D0-011361777507} = {CCA7B3EC-5473-4570-802F-14A037DF5D02}
+		{A308D762-5FCE-483B-AA44-B579CD574452} = {CCA7B3EC-5473-4570-802F-14A037DF5D02}
+		{3D656F59-148F-4F6A-A42D-A5BD695FA9DC} = {BB7D3AA1-260F-4890-B037-1FC0D14C839C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F34EDBA-1417-4B2C-A6A8-157749FA160F}
